@@ -9,7 +9,7 @@ What is YouTube-DL?
 How to use this image
 =====================
 
-    $ docker run --rm --user $UID:$GID -v $PWD:/downloads babim/youtube-dl:single \
+    $ docker run --rm --user $UID:$GID -v $PWD:/download babim/youtube-dl:single \
           <video_url>
 
   * `--user $UID:$GID` is to run as your current user, and not `root`.
