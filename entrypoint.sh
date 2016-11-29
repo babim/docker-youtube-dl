@@ -11,21 +11,18 @@ agid=${agid:-1000}
 
 if id user >/dev/null 2>&1; then
         echo "user exists"
+        if [[ "$auid" = "0" ]] || [[ "$aguid" == "0" ]]; then
+          echo "Run in ROOT user"
+        else
+          echo "Run in user"
+          su - user
+        fi
 else
         echo "user does not exist"
-
-if [[ "$auid" = "0" ]] || [[ "$aguid" == "0" ]]; then
-  echo "Run in ROOT user"
-else
-  echo "Run in user"
-  if [ ! -d "/home/user" ]; then
-  addgroup -g ${agid} user && \
-  adduser -D -u ${auid} -G user user && \
-  chown -R $auid:$agid $DOWNLOADPATH
-  fi
-  su - user
-fi
-
+        addgroup -g ${agid} user && \
+        adduser -D -u ${auid} -G user user && \
+        chown -R $auid:$agid $DOWNLOADPATH
+        su - user
 fi
 
 # help
