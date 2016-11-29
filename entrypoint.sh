@@ -1,5 +1,8 @@
 #!/bin/sh
 
+DOWNLOADPATH=${DOWNLOADPATH:-/download}
+if [ ! -d "$DOWNLOADPATH" ]; then mkdir -p $DOWNLOADPATH; fi
+
 export HTTPS_PROXY="$PROXY"
 export HTTP_PROXY="$PROXY"
 # set ID docker run
@@ -18,7 +21,7 @@ else
   if [ ! -d "/home/user" ]; then
   addgroup -g ${agid} user && \
   adduser -D -u ${auid} -G user user && \
-  chown -R $auid:$agid /download
+  chown -R $auid:$agid $DOWNLOADPATH
   fi
   su - user
 fi
@@ -31,16 +34,16 @@ echo "---"
 youtube-dl --help
 
 # create startup run
-if [ ! -f "/download/startup.sh" ]; then
+if [ ! -f "$DOWNLOADPATH/startup.sh" ]; then
 # create
-cat <<EOF>> /download/startup.sh
+cat <<EOF>> $DOWNLOADPATH/startup.sh
 #!/bin/sh
 # your startup command
 EOF
-  chmod +x /download/startup.sh
+  chmod +x $DOWNLOADPATH/startup.sh
 else
 # run
-  /cache/startup.sh
+  $DOWNLOADPATH/startup.sh
 fi
 
 # stop and wait command
