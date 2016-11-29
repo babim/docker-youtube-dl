@@ -7,7 +7,7 @@ export HTTPS_PROXY="$PROXY"
 export HTTP_PROXY="$PROXY"
 # set ID docker run
 auid=${auid:-1000}
-agid=${agid:-1000}
+agid=${agid:-$auid}
 
 if id user >/dev/null 2>&1; then
         echo "user exists"
