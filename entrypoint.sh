@@ -8,6 +8,7 @@ export HTTP_PROXY="$PROXY"
 # set ID docker run
 auid=${auid:-1000}
 agid=${agid:-$auid}
+auser${auser:-user}
 
 if id user >/dev/null 2>&1; then
         echo "user exists"
@@ -15,14 +16,19 @@ if id user >/dev/null 2>&1; then
           echo "Run in ROOT user"
         else
           echo "Run in user"
+          # login user
           su - user
         fi
 else
         echo "user does not exist"
-        addgroup -g ${agid} user && \
-        adduser -D -u ${auid} -G user user && \
+        addgroup -g ${agid} ${auser} && \
+        adduser -D -u ${auid} -G ${auser} ${auser} && \
         chown -R $auid:$agid $DOWNLOADPATH
-        su - user
+        # fix su command user
+        sed -i '$ d' /etc/passwd
+        echo "$auser:x:$auid:$agid:Linux User:/home/$auser:/bin/sh" >> /etc/passwd
+        # login user
+        su - ${auser}
 fi
 
 # help
