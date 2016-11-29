@@ -9,16 +9,16 @@ RUN set -x \
     # Clean-up
  && apk del curl \
     # Create directory to hold downloads.
- && mkdir /downloads \
- && chmod a+rw /downloads \
+ && mkdir /download \
+ && chmod a+rw /download \
     # Basic check it works.
  && youtube-dl --version
 
 ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
-WORKDIR /downloads
+WORKDIR /download
 
-VOLUME ["/downloads"]
+VOLUME ["/download"]
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
