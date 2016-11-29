@@ -1,7 +1,5 @@
 FROM babim/alpinebase
 
-ADD entrypoint.sh /entrypoint.sh
-
 RUN set -x \
  && apk add --no-cache ca-certificates curl ffmpeg python \
     # Install youtube-dl
@@ -14,8 +12,7 @@ RUN set -x \
  && mkdir /downloads \
  && chmod a+rw /downloads \
     # Basic check it works.
- && youtube-dl --version \
- && chmod +x /entrypoint.sh
+ && youtube-dl --version
 
 ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
@@ -23,4 +20,6 @@ WORKDIR /downloads
 
 VOLUME ["/downloads"]
 
-CMD ["/entrypoint.sh"]
+ADD entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
