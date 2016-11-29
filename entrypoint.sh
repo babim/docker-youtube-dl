@@ -1,5 +1,7 @@
 #!/bin/sh
 
+export HTTPS_PROXY="$PROXY"
+export HTTP_PROXY="$PROXY"
 # set ID docker run
 auid=${auid:-1000}
 agid=${agid:-1000}
@@ -16,9 +18,7 @@ else
   if [ ! -d "/home/user" ]; then
   addgroup -g ${agid} user && \
   adduser -D -u ${auid} -G user user && \
-  mkdir -p /home/user/.cache/acd_cli
-  ln -s /cache /home/user/.cache/acd_cli
-  chown -R $auid:$agid /home/user
+  chown -R $auid:$agid /download
   fi
   su - user
 fi
@@ -31,13 +31,13 @@ echo "---"
 youtube-dl --help
 
 # create startup run
-if [ ! -f "/cache/startup.sh" ]; then
+if [ ! -f "/download/startup.sh" ]; then
 # create
-cat <<EOF>> /cache/startup.sh
+cat <<EOF>> /download/startup.sh
 #!/bin/sh
 # your startup command
 EOF
-  chmod +x /cache/startup.sh
+  chmod +x /download/startup.sh
 else
 # run
   /cache/startup.sh
