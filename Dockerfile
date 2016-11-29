@@ -12,8 +12,8 @@ RUN set -x \
     # Clean-up
  && apk del curl \
     # Create directory to hold downloads.
- && mkdir /downloads \
- && chmod a+rw /downloads \
+ && mkdir /download \
+ && chmod a+rw /download \
     # Basic check it works.
  && youtube-dl --version
 
@@ -22,8 +22,8 @@ ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 # create user
 RUN adduser -S -D -u $auid -g $agid user
 
-WORKDIR /downloads
-VOLUME ["/downloads"]
+WORKDIR /download
+VOLUME ["/download"]
 
 USER user
 
