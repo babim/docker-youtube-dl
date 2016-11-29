@@ -6,11 +6,10 @@ What is YouTube-DL?
 [youtube-dl](https://github.com/rg3/youtube-dl) is a command-line program to download videos from YouTube.com and other video sites.
 
 # Usage
-acdcli amazon cloud drive tool on alpine linux
 ```
 docker run -it --name youtube-dl -v /download:/download babim/acdcli
 ```
-If not have uid and gid option. ACD_CLI with run in uid 1000 add uid and gid option
+If not have uid and gid option. Default run in uid 1000 add uid and gid option
 or set 0 to run with root
 ```
 -e auid="0" -e agid="0"
