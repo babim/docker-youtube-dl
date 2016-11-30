@@ -1,3 +1,6 @@
+[![](https://images.microbadger.com/badges/image/babim/youtube-dl.svg)](https://microbadger.com/images/babim/youtube-dl "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/babim/youtube-dl.svg)](https://microbadger.com/images/babim/youtube-dl "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/babim/youtube-dl:single.svg)](https://microbadger.com/images/babim/youtube-dl:single "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/babim/youtube-dl:single.svg)](https://microbadger.com/images/babim/youtube-dl:single "Get your own version badge on microbadger.com")
+
 thanks wernight
 
 What is YouTube-DL?
