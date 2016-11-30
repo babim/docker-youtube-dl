@@ -10,12 +10,12 @@ auid=${auid:-1000}
 agid=${agid:-$auid}
 auser${auser:-user}
 
-if id user >/dev/null 2>&1; then
+if id $auser >/dev/null 2>&1; then
         echo "user exists"
         if [[ "$auid" = "0" ]] || [[ "$aguid" == "0" ]]; then
           echo "Run in ROOT user"
         else
-          echo "Run in user"
+          echo "Run in $auser"
           # login user
           su - user
         fi
